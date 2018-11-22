@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GJ_TimeLine", "GJ_TimeLine\GJ_TimeLine.csproj", "{AE431A1F-67C0-4B1F-A67D-58D078A2153E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GJ_TimeLine_Show", "GJ_TimeLine_Show\GJ_TimeLine_Show.csproj", "{7FB640B8-53BA-4142-A5D4-3A30109A476B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{AE431A1F-67C0-4B1F-A67D-58D078A2153E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE431A1F-67C0-4B1F-A67D-58D078A2153E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE431A1F-67C0-4B1F-A67D-58D078A2153E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FB640B8-53BA-4142-A5D4-3A30109A476B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FB640B8-53BA-4142-A5D4-3A30109A476B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FB640B8-53BA-4142-A5D4-3A30109A476B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FB640B8-53BA-4142-A5D4-3A30109A476B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
