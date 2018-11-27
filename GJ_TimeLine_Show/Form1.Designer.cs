@@ -33,6 +33,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.chatListBox1 = new CCWin.SkinControl.ChatListBox();
             this.SuspendLayout();
             // 
             // progressBar1
@@ -79,11 +80,27 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "label1";
             // 
+            // chatListBox1
+            // 
+            this.chatListBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.chatListBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.chatListBox1.ForeColor = System.Drawing.Color.Black;
+            this.chatListBox1.FriendsMobile = true;
+            this.chatListBox1.ListSubItemMenu = null;
+            this.chatListBox1.Location = new System.Drawing.Point(12, 116);
+            this.chatListBox1.Name = "chatListBox1";
+            this.chatListBox1.SelectSubItem = null;
+            this.chatListBox1.Size = new System.Drawing.Size(218, 150);
+            this.chatListBox1.SubItemMenu = null;
+            this.chatListBox1.TabIndex = 5;
+            this.chatListBox1.Text = "chatListBox1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(243, 288);
+            this.Controls.Add(this.chatListBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -91,6 +108,7 @@
             this.Controls.Add(this.progressBar1);
             this.Name = "Form1";
             this.Text = "监视框架";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -103,6 +121,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label1;
+        private CCWin.SkinControl.ChatListBox chatListBox1;
     }
 }
 

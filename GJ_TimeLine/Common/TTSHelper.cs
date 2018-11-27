@@ -16,7 +16,7 @@ namespace GJ_TimeLine.Common
 
             Hashtable table = new Hashtable();
             table.Add("lan", "zh");
-            table.Add("text", data);
+            table.Add("text", System.Web.HttpUtility.UrlEncode(data));
             table.Add("spd", 5);
             table.Add("source", "web");
             await Task.Run(() => {

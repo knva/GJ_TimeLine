@@ -70,6 +70,8 @@ namespace GJ_TimeLine
         {
 
             string json2 = ReadConfig(@".\config.json");
+            if (json2 == null) { return; }
+
             MyConfig c1 = JsonConvert.DeserializeObject<MyConfig>(json2);
             if (c1.path != path)
             {
@@ -91,8 +93,15 @@ namespace GJ_TimeLine
         }
         public string ReadConfig(string path)
         {
-            String alltext = File.ReadAllText(path, System.Text.Encoding.UTF8);
-            return alltext;
+            if (File.Exists(path))
+            {
+                String alltext = File.ReadAllText(path, System.Text.Encoding.UTF8);
+                return alltext;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public Dictionary<string, string> loadTimeLineTxtList(string path)
@@ -118,6 +127,7 @@ namespace GJ_TimeLine
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+        
             changeConfigPath(textBox1.Text);
             string optionpath = settingInit();
             ListBoxInit(optionpath);
@@ -130,12 +140,21 @@ namespace GJ_TimeLine
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (listBox1.SelectedItem == null) {
+                return;
+
+            }
             TimeLine_Core tc = new TimeLine_Core();
             foreach (var key in tlist) {
                 if (key.Key == listBox1.SelectedItem.ToString()) { 
-                tc.initTconfig(key.Value);
+                    tc.initTconfig(key.Value);
                 }
             }
+        }
+
+        private void MainWIndow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
         }
     }
 }

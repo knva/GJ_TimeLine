@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GJ_TimeLine.TimeLine;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,12 +14,18 @@ namespace GJ_TimeLine_Show
 {
     public partial class Form1 : Form
     {
+        public TimelineConfig tc { get; set; }
         public Form1()
         {
             InitializeComponent();
         }
+        public Form1(TimelineConfig tconfig)
+        {
+            InitializeComponent();
 
-        private  void button3_Click(object sender, EventArgs e)
+            tc = tconfig;
+        }
+        private void button3_Click(object sender, EventArgs e)
         {
             Thread fThread = new Thread(new ThreadStart(SleepT));//开辟一个新的线程
             fThread.Start();
@@ -46,6 +53,24 @@ namespace GJ_TimeLine_Show
             {
                 this.label1.Text = ipos.ToString() + "/100";
                 this.progressBar1.Value = Convert.ToInt32(ipos);
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            if (tc == null)
+            {
+                MessageBox.Show("无法加载");
+            }
+            if (tc.Items.Count != 0)
+            {
+
+                foreach (var item in tc.Items)
+                {
+
+                    CCWin.SkinControl.ChatListItem cli = new CCWin.SkinControl.ChatListItem(item.value.ToString());
+                    chatListBox1.Items.Add(cli);
+                }
             }
         }
     }
