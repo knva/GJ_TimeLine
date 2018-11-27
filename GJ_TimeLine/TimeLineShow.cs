@@ -115,8 +115,15 @@ namespace GJ_TimeLine
                 item.BackColor = Color.Empty;
             }
         
-            this.listView1.Items[nowact].BackColor = Color.Red;
-            this.listView1.EnsureVisible(nowact);//滚动到指定的行位置
+            this.listView1.Items[nowact+1].BackColor = Color.Red;
+            if (nowact + 1 > this.listView1.Items.Count)
+            {
+                this.listView1.EnsureVisible(nowact);//滚动到指定的行位置
+            }
+            else {
+                this.listView1.EnsureVisible(nowact + 1);//滚动到指定的行位置
+            }
+            
         }
 
         private string convert2time(int duration) {
