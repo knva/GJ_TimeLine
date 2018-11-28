@@ -102,7 +102,16 @@ namespace GJ_TimeLine
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            StartTimerThread();
+            if (tlt != null && tlt.isStart)
+            {
+                this.reloadConfig();
+                this.button1.Text = "开始";
+            }
+            else
+            {
+                this.StartTimerThread();
+                this.button1.Text = "停止";
+            }
 
         }
         private void StartTimerThread() {

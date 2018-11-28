@@ -71,7 +71,14 @@ namespace GJ_TimeLine
                     nowact++;
                 }
                 if (voiceLine.ContainsKey(nowtime)) {
-                    listentts(voiceLine[nowtime].Split(' ')[1]+"准备") ;
+                    string[] ttsstring = voiceLine[nowtime].Split(' ');
+                    if (ttsstring.Count() >= 2)
+                    {
+                        listentts(ttsstring[1] + "准备");
+                    }
+                    else {
+                        listentts(voiceLine[nowtime] + "准备");
+                    }
                 }
 
                 uptime(nowtime);
