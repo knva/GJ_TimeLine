@@ -153,6 +153,9 @@ namespace GJ_TimeLine
             this.listView1.Columns.Add("动作", 120, HorizontalAlignment.Left); //一步添加
             this.listView1.Columns.Add("时间", 60, HorizontalAlignment.Left); //一步添加
             if (tctemp.Items.Count == 0) { return; }
+            if (nowtime >= tctemp.Items.Last().time) {
+                return;
+            }
             this.listView1.BeginUpdate();   //数据更新，UI暂时挂起，直到EndUpdate绘制控件，可以有效避免闪烁并大大提高加载速度
             foreach (var item in tctemp.Items)
             {

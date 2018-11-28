@@ -37,16 +37,19 @@ namespace GJ_TimeLine
             nowalert = 0;
             nowtime = 0;
             voiceLine = new Dictionary<double, string>();
-            foreach (var item in tc.Items) {
-                foreach (var voiceitem in tc.AlertAlls) {
-                    if (item.value == voiceitem.ActivityName) {
+            foreach (var item in tc.Items)
+            {
+                foreach (var voiceitem in tc.AlertAlls)
+                {
+                    if (item.value == voiceitem.ActivityName)
+                    {
                         voiceLine.Add(item.time - voiceitem.ReminderTime, voiceitem.AlertSound);
                     }
                 }
             }
 
         }
-        private  void listentts(string tt)
+        private void listentts(string tt)
         {
             string voice = "";
             if (tt.Split(']').Count() > 1)
@@ -61,26 +64,33 @@ namespace GJ_TimeLine
         }
         public void ThreadFun() // 来自委托：ThreadStart 
         {
-            while (isStart) {
+            while (isStart)
+            {
                 System.Threading.Thread.Sleep(1000);
-             
-                Console.WriteLine(nowtime);
-                if (nowtime == tc.Items[nowact].time) {
-                    Console.WriteLine(tc.Items[nowact].value);
-                    upact(nowact);
-                    nowact++;
-                }
-                if (voiceLine.ContainsKey(nowtime)) {
-                    string[] ttsstring = voiceLine[nowtime].Split(' ');
-                    if (ttsstring.Count() >= 2)
-                    {
-                        listentts(ttsstring[1] + "准备");
-                    }
-                    else {
-                        listentts(voiceLine[nowtime] + "准备");
-                    }
-                }
 
+                Console.WriteLine(nowtime);
+                if (nowact < tc.Items.Count())
+                {
+
+                    if (nowtime == tc.Items[nowact].time)
+                    {
+                        Console.WriteLine(tc.Items[nowact].value);
+                        upact(nowact);
+                        nowact++;
+                    }
+                    if (voiceLine.ContainsKey(nowtime))
+                    {
+                        string[] ttsstring = voiceLine[nowtime].Split(' ');
+                        if (ttsstring.Count() >= 2)
+                        {
+                            listentts(ttsstring[1] + "准备");
+                        }
+                        else
+                        {
+                            listentts(voiceLine[nowtime] + "准备");
+                        }
+                    }
+                }
                 uptime(nowtime);
                 nowtime++;
             }
