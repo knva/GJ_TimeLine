@@ -49,6 +49,10 @@ namespace GJ_TimeLine
 
         private void TimeLineShow_Load(object sender, EventArgs e)
         {
+            initConfig();
+        }
+        private void initConfig() {
+
             this.listView1.Clear();
             this.listView1.View = View.Details;
             this.listView1.Columns.Add("动作", 120, HorizontalAlignment.Left); //一步添加
@@ -64,7 +68,7 @@ namespace GJ_TimeLine
                 foreach (var item in tc.Items)
                 {
                     ListViewItem lvi = new ListViewItem();
-                    
+
                     lvi.Text = item.value;
                     lvi.SubItems.Add(convert2time((int)item.time));
                     this.listView1.Items.Add((lvi));
@@ -98,6 +102,11 @@ namespace GJ_TimeLine
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            StartTimerThread();
+
+        }
+        private void StartTimerThread() {
+
             tctemp = this.tc;
             tlt = new TimeLineThread(this.tc);
             tlt.isStart = true;
@@ -105,18 +114,22 @@ namespace GJ_TimeLine
             tlt.uptime = new TimeLineThread.UpTimeDelegate(RefreshTime);
             thread = new Thread(new ThreadStart(tlt.ThreadFun));
             thread.Start();
-
         }
-
 
         private void button2_Click(object sender, EventArgs e)
         {
+            reloadConfig();
+        }
+
+        private void reloadConfig() {
+
             stopThread();
             selectItem(0);
             time_label.Text = "";
             nowact = 0;
-            TimeLineShow_Load(sender, e);
+            initConfig();
         }
+
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -291,6 +304,44 @@ namespace GJ_TimeLine
             xposition = e.X;
             yposition = e.Y;
         }
+
+
+        private const int WM_HOTKEY = 0x312; //窗口消息-热键
+        private const int WM_CREATE = 0x1; //窗口消息-创建
+        private const int WM_DESTROY = 0x2; //窗口消息-销毁
+        private const int Space = 0x3572; //热键ID
+        protected override void WndProc(ref Message m)
+        {
+            base.WndProc(ref m);
+            switch (m.Msg)
+            {
+                case WM_HOTKEY: //窗口消息-热键ID
+                    switch (m.WParam.ToInt32())
+                    {
+                        case Space: //热键ID
+                            if (tlt!=null&&tlt.isStart)
+                            {
+                                this.reloadConfig();
+                            }
+                            else {
+                                this.StartTimerThread();
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case WM_CREATE: //窗口消息-创建
+                    HotKey.RegKey(Handle, Space,   HotKey.KeyModifiers.Alt, Keys.F5);
+                    break;
+                case WM_DESTROY: //窗口消息-销毁
+                    HotKey.UnRegKey(Handle, Space); //销毁热键
+                    break;
+                default:
+                    break;
+            }
+        }
+
     }
 
 

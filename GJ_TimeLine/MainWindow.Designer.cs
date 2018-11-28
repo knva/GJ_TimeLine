@@ -34,6 +34,7 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -93,11 +94,21 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(30, 221);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(347, 12);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "特别提示:加载配置后,ALT+F5快捷启动,再次点击ALT+F5即可重置";
+            // 
             // MainWIndow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(436, 231);
+            this.ClientSize = new System.Drawing.Size(438, 266);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.listBox1);
@@ -105,7 +116,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Name = "MainWIndow";
-            this.Text = "古剑时间轴监控";
+            this.Text = "古剑时间轴监控  Author:[ 太华山 ]爽爽子";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWIndow_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainWIndow_FormClosed);
             this.Load += new System.EventHandler(this.MainWIndow_Load);
@@ -122,6 +133,7 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label2;
     }
 }
 

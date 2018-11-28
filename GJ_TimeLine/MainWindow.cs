@@ -87,7 +87,9 @@ namespace GJ_TimeLine
         public void ListBoxInit(string path)
         {
             tlist = loadTimeLineTxtList(path);
+
             listBox1.Items.Clear();
+            if (tlist == null) { return; }
             foreach (var key in tlist)
             {
                 listBox1.Items.Add(key.Key);
@@ -108,6 +110,9 @@ namespace GJ_TimeLine
 
         public Dictionary<string, string> loadTimeLineTxtList(string path)
         {
+            if (!Directory.Exists(path)) {
+                return null;
+            }
             Dictionary<string, string> filelist = new Dictionary<string, string>();
             System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(path);
             System.IO.FileInfo[] files = dir.GetFiles(); // 获取所有文件信息。。
@@ -156,8 +161,10 @@ namespace GJ_TimeLine
 
         private void MainWIndow_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (timelinecore != null) { 
             timelinecore.exit();
             timelinecore = null;
+            }
         }
 
         private void MainWIndow_FormClosed(object sender, FormClosedEventArgs e)

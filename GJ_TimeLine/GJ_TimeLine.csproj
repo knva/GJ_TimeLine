@@ -75,6 +75,7 @@
     <Compile Include="Common\DoubleBufferListView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Common\HotKey.cs" />
     <Compile Include="Common\TTSHelper.cs" />
     <Compile Include="Config\Config.cs" />
     <Compile Include="MainWindow.cs">
