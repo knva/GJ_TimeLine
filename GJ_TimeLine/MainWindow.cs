@@ -23,6 +23,8 @@ namespace GJ_TimeLine
         }
         Dictionary<string, string> tlist = new Dictionary<string, string>();
         TimeLine_Core timelinecore;
+        public string hotkey { get; set; }
+        
         private void button1_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("explorer", textBox1.Text);
@@ -46,6 +48,7 @@ namespace GJ_TimeLine
 
                 MyConfig c = new MyConfig();
                 c.path = optionpath;
+                c.hotkey = "CTRL+F5";
                 string json1 = JsonConvert.SerializeObject(c);
                 File.WriteAllText(@".\config.json", json1, Encoding.UTF8);
 
@@ -58,11 +61,13 @@ namespace GJ_TimeLine
                 {
                     optionpath = path + "\\option";
                     textBox1.Text = optionpath;
+                    hotkey = c.hotkey;
                 }
                 else
                 {
                     optionpath = c.path;
                     textBox1.Text = optionpath;
+                    hotkey = c.hotkey;
                 }
             }
             return optionpath;
@@ -151,7 +156,7 @@ namespace GJ_TimeLine
                 return;
 
             }
-            timelinecore = new TimeLine_Core();
+            timelinecore = new TimeLine_Core(this.hotkey);
             foreach (var key in tlist) {
                 if (key.Key == listBox1.SelectedItem.ToString()) {
                     timelinecore.initTconfig(key.Value);
@@ -170,6 +175,15 @@ namespace GJ_TimeLine
         private void MainWIndow_FormClosed(object sender, FormClosedEventArgs e)
         {
            
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string json2 = ReadConfig(@".\config.json");
+            MyConfig c = JsonConvert.DeserializeObject<MyConfig>(json2);
+            HotKeyEdit hke = new HotKeyEdit(c.hotkey);
+            hke.ShowDialog();
+            settingInit();
         }
     }
 }

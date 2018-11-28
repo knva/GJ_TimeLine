@@ -9,5 +9,6 @@ namespace GJ_TimeLine.Config
     class MyConfig
     {
         public string path { get; set; }
+        public string hotkey { get; set; }
     }
 }

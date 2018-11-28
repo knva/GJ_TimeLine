@@ -20,6 +20,8 @@ namespace GJ_TimeLine
         public TimelineConfig tc { get; set; }
         public TimelineConfig tctemp { get; set; }
         private int nowact { get; set; }
+
+        private string hotkey { get; set; }
     
         private Thread thread;
         private TimeLineThread tlt;
@@ -35,11 +37,12 @@ namespace GJ_TimeLine
         {
             InitializeComponent();
         }
-        public TimeLineShow(TimelineConfig tconfig)
+        public TimeLineShow(TimelineConfig tconfig,string hotkey)
         {
             InitializeComponent();
             tc = tconfig;
             this.nowact = 0;
+            this.hotkey = hotkey;
 
             //透明
             this.BackColor = Color.SeaShell;
@@ -317,6 +320,28 @@ namespace GJ_TimeLine
             yposition = e.Y;
         }
 
+        //protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        //{
+        //    string[] keyStrs = hotkey.Split('+');
+        //    Keys combineKey = Keys.None;
+        //    KeysConverter kc = new KeysConverter();
+        //    foreach (string key in keyStrs)
+        //        combineKey |= (Keys)kc.ConvertFromString(key.Trim());
+        //    if (keyData == combineKey)
+        //    {
+        //        if (tlt != null && tlt.isStart)
+        //        {
+        //            this.button1.Text = "开始";
+        //            this.reloadConfig();
+        //        }
+        //        else
+        //        {
+        //            this.button1.Text = "停止";
+        //            this.StartTimerThread();
+        //        }
+        //    }
+        //        return base.ProcessCmdKey(ref msg, keyData);
+        //}
 
         private const int WM_HOTKEY = 0x312; //窗口消息-热键
         private const int WM_CREATE = 0x1; //窗口消息-创建
@@ -331,11 +356,14 @@ namespace GJ_TimeLine
                     switch (m.WParam.ToInt32())
                     {
                         case Space: //热键ID
-                            if (tlt!=null&&tlt.isStart)
+                            if (tlt != null && tlt.isStart)
                             {
+                                this.button1.Text = "开始";
                                 this.reloadConfig();
                             }
-                            else {
+                            else
+                            {
+                                this.button1.Text = "停止";
                                 this.StartTimerThread();
                             }
                             break;
@@ -344,7 +372,43 @@ namespace GJ_TimeLine
                     }
                     break;
                 case WM_CREATE: //窗口消息-创建
-                    HotKey.RegKey(Handle, Space,   HotKey.KeyModifiers.Alt, Keys.F5);
+
+                    string[] keyStrs = hotkey.Split('+');
+                    Keys combineKey = Keys.None;
+                    KeysConverter kc = new KeysConverter();
+                    combineKey = (Keys)kc.ConvertFromString(keyStrs.Last());
+                   
+                    if (keyStrs[0].ToLower() == "ctrl") {
+                        if (keyStrs[1].ToLower() == "alt")
+                        {
+                            HotKey.RegKey(Handle, Space, HotKey.KeyModifiers.Ctrl | HotKey.KeyModifiers.Alt, combineKey);
+                            if (keyStrs.Count() > 3) {
+                                HotKey.RegKey(Handle, Space, HotKey.KeyModifiers.Ctrl | HotKey.KeyModifiers.Shift | HotKey.KeyModifiers.Alt, combineKey);
+                            }
+                        }
+                        else { 
+                            HotKey.RegKey(Handle, Space, HotKey.KeyModifiers.Ctrl, combineKey);
+                        }
+                    }
+
+                    if (keyStrs[0].ToLower() == "alt")
+                    {
+                        if (keyStrs[1].ToLower() == "shift")
+                        {
+                            HotKey.RegKey(Handle, Space, HotKey.KeyModifiers.Alt | HotKey.KeyModifiers.Shift, combineKey);
+                            if (keyStrs.Count() > 3)
+                            {
+                                HotKey.RegKey(Handle, Space, HotKey.KeyModifiers.Ctrl | HotKey.KeyModifiers.Shift | HotKey.KeyModifiers.Alt, combineKey);
+                            }
+                        }
+                        else
+                        {
+                            HotKey.RegKey(Handle, Space, HotKey.KeyModifiers.Alt, combineKey);
+                        }
+                      
+                     
+                    }
+                   
                     break;
                 case WM_DESTROY: //窗口消息-销毁
                     HotKey.UnRegKey(Handle, Space); //销毁热键

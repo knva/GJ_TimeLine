@@ -11,6 +11,11 @@ namespace GJ_TimeLine.TimeLine
 {
     class TimeLine_Core
     {
+        public string hotkey { get; set; }
+        public TimeLine_Core(string hotkey) {
+
+            this.hotkey = hotkey;
+        }
         public TimeLineShow tls;
         public void initTconfig(string path)
         {
@@ -32,7 +37,7 @@ namespace GJ_TimeLine.TimeLine
                 string text = ReadConfig(path);
                 TimelineConfig c = TConfigParser.TimelineConfig.Parse(text);
 
-                tls = new TimeLineShow(c);
+                tls = new TimeLineShow(c,this.hotkey);
                 tls.Show();
                 tls.TopMost = true;
             }

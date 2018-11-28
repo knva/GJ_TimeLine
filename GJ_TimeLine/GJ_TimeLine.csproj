@@ -78,6 +78,12 @@
     <Compile Include="Common\HotKey.cs" />
     <Compile Include="Common\TTSHelper.cs" />
     <Compile Include="Config\Config.cs" />
+    <Compile Include="HotKeyEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HotKeyEdit.Designer.cs">
+      <DependentUpon>HotKeyEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +101,9 @@
     <Compile Include="TimeLineThread.cs" />
     <Compile Include="TimeLine\TConfig.cs" />
     <Compile Include="TimeLine\TimeLine_Core.cs" />
+    <EmbeddedResource Include="HotKeyEdit.resx">
+      <DependentUpon>HotKeyEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
