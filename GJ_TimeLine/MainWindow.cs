@@ -16,11 +16,13 @@ namespace GJ_TimeLine
 {
     public partial class MainWIndow : Form
     {
+       
         public MainWIndow()
         {
             InitializeComponent();
         }
         Dictionary<string, string> tlist = new Dictionary<string, string>();
+        TimeLine_Core timelinecore;
         private void button1_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("explorer", textBox1.Text);
@@ -144,17 +146,23 @@ namespace GJ_TimeLine
                 return;
 
             }
-            TimeLine_Core tc = new TimeLine_Core();
+            timelinecore = new TimeLine_Core();
             foreach (var key in tlist) {
-                if (key.Key == listBox1.SelectedItem.ToString()) { 
-                    tc.initTconfig(key.Value);
+                if (key.Key == listBox1.SelectedItem.ToString()) {
+                    timelinecore.initTconfig(key.Value);
                 }
             }
         }
 
         private void MainWIndow_FormClosing(object sender, FormClosingEventArgs e)
         {
+            timelinecore.exit();
+            timelinecore = null;
+        }
 
+        private void MainWIndow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+           
         }
     }
 }

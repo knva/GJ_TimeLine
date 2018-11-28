@@ -14,8 +14,8 @@ namespace GJ_TimeLine.TimeLine
         public TimeLineShow tls;
         public void initTconfig(string path)
         {
-        
-   
+
+
             bool isExitFormConfig = false;//判断配置窗口是否已经打开，防止重复打开多个配置窗口Form2
             foreach (Form openForm in Application.OpenForms)
             {
@@ -44,6 +44,13 @@ namespace GJ_TimeLine.TimeLine
             String alltext = File.ReadAllText(path, System.Text.Encoding.UTF8);
             return alltext;
         }
+        public void exit()
+        {
+            tls.stopThread();
+            tls.Close();
+           
+        }
     }
-   
 }
+
+

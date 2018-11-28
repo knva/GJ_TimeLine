@@ -107,6 +107,7 @@
             this.Name = "MainWIndow";
             this.Text = "古剑时间轴监控";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWIndow_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainWIndow_FormClosed);
             this.Load += new System.EventHandler(this.MainWIndow_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
