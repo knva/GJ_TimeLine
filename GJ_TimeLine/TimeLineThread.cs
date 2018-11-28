@@ -83,11 +83,11 @@ namespace GJ_TimeLine
                         string[] ttsstring = voiceLine[nowtime].Split(' ');
                         if (ttsstring.Count() >= 2)
                         {
-                            listentts(ttsstring[1] + "准备");
+                            listentts(ttsstring[1] + "");
                         }
                         else
                         {
-                            listentts(voiceLine[nowtime] + "准备");
+                            listentts(voiceLine[nowtime] + "");
                         }
                     }
                 }

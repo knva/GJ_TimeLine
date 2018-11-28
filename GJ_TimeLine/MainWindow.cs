@@ -156,6 +156,7 @@ namespace GJ_TimeLine
                 return;
 
             }
+            settingInit();
             timelinecore = new TimeLine_Core(this.hotkey);
             foreach (var key in tlist) {
                 if (key.Key == listBox1.SelectedItem.ToString()) {
