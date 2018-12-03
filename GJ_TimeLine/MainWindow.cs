@@ -32,8 +32,10 @@ namespace GJ_TimeLine
 
         private void MainWIndow_Load(object sender, EventArgs e)
         {
+            hotkey = "Ctrl+F5";
             string optionpath = settingInit();
             ListBoxInit(optionpath);
+            
         }
 
         public string settingInit()

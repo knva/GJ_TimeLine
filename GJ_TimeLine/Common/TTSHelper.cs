@@ -21,15 +21,21 @@ namespace GJ_TimeLine.Common
             table.Add("source", "web");
             await Task.Run(() => {
                 string ttsurl = makeUrl("http://fanyi.baidu.com/gettts", table);
-                using (var mf = new MediaFoundationReader(ttsurl))
-                using (var wo = new WaveOutEvent())
+                try
                 {
-                    wo.Init(mf);
-                    wo.Play();
-                    while (wo.PlaybackState == PlaybackState.Playing)
+                    using (var mf = new MediaFoundationReader(ttsurl))
+                    using (var wo = new WaveOutEvent())
                     {
-                        Thread.Sleep(1000);
+                        wo.Init(mf);
+                        wo.Play();
+                        while (wo.PlaybackState == PlaybackState.Playing)
+                        {
+                            Thread.Sleep(1000);
+                        }
                     }
+                }
+                catch (Exception e) {
+                    Console.WriteLine("ERR:{0}", e);
                 }
 
             });

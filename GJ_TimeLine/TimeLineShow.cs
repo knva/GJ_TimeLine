@@ -372,7 +372,7 @@ namespace GJ_TimeLine
                     }
                     break;
                 case WM_CREATE: //窗口消息-创建
-
+                    
                     string[] keyStrs = hotkey.Split('+');
                     Keys combineKey = Keys.None;
                     KeysConverter kc = new KeysConverter();

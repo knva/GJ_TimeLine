@@ -15,6 +15,9 @@ namespace GJ_TimeLine.TimeLine
         public TimeLine_Core(string hotkey) {
 
             this.hotkey = hotkey;
+            if (this.hotkey==null) {
+                this.hotkey = "Ctrl+F5";
+            }
         }
         public TimeLineShow tls;
         public void initTconfig(string path)
