@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GJ_TimeLine.TimeLine
+namespace GJ_TimeLine_Core
 {
     public class AlertAll
     {
@@ -76,13 +76,13 @@ namespace GJ_TimeLine.TimeLine
 
         static readonly Parser<ConfigOp> TimelineActivityStatement =
           TimelineActivity.Select<Tuple<double, string>, ConfigOp>(t => ((TimelineConfig config) =>
-         {
-            TimelineActivityData tad = new TimelineActivityData();
-             tad.time = t.Item1;
-            tad.value = t.Item2;
+          {
+              TimelineActivityData tad = new TimelineActivityData();
+              tad.time = t.Item1;
+              tad.value = t.Item2;
 
-           config.Items.Add(tad);
-             })).Named("TimelineActivityStatement");
+              config.Items.Add(tad);
+          })).Named("TimelineActivityStatement");
         static readonly Parser<Tuple<string, string, string>> AlertAll =
             from alertall in Parse.String("alertall")
             from spaces in Spaces

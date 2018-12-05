@@ -1,6 +1,7 @@
 ﻿
 using GJ_TimeLine.Common;
 using GJ_TimeLine.TimeLine;
+using GJ_TimeLine_Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

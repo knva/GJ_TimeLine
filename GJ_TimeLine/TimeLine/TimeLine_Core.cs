@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GJ_TimeLine_Core;
 using Sprache;
 namespace GJ_TimeLine.TimeLine
 {
@@ -23,7 +24,8 @@ namespace GJ_TimeLine.TimeLine
         public void initTconfig(string path)
         {
 
-
+            GJ_TimeLineShow.MainWindow mw = new GJ_TimeLineShow.MainWindow();
+            mw.Show();
             bool isExitFormConfig = false;//判断配置窗口是否已经打开，防止重复打开多个配置窗口Form2
             foreach (Form openForm in Application.OpenForms)
             {
